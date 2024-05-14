@@ -11,10 +11,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
@@ -41,11 +40,12 @@ public class SecurityConfig {
                     String googleId = principal.getAttributes().get("sub").toString();
                     AppUser appUser = appUserService.getByGoogleId(googleId);
 
-                    if (appUser.getUsername() == null) {
+                    if (appUser.getUsername() == null || appUser.getUsername().isBlank()) {
                         response.sendRedirect(getRegisterUrl());
+                    } else {
+                        response.sendRedirect(getDefaultSuccessUrl());
                     }
 
-                    response.sendRedirect(getDefaultSuccessUrl());
                 }))
                 .logout(c -> c.logoutSuccessUrl(getLogoutSuccessUrl()));
 
@@ -53,11 +53,11 @@ public class SecurityConfig {
     }
 
     @Bean
-    public OAuth2UserService<OidcUserRequest, OidcUser> oAuth2UserService() {
-        OidcUserService oidcUserService = new OidcUserService();
+    public OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService() {
+        DefaultOAuth2UserService userService = new DefaultOAuth2UserService();
 
         return request -> {
-            OidcUser user = oidcUserService.loadUser(request);
+            OAuth2User user = userService.loadUser(request);
 
             if (!appUserService.existsByGoogleId(user.getAttributes().get("sub").toString())) {
                 AppUser newUser = new AppUser(
