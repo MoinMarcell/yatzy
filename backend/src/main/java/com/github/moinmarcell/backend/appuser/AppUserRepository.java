@@ -11,4 +11,6 @@ interface AppUserRepository extends MongoRepository<AppUser, String> {
     Optional<AppUser> findByGoogleId(String googleId);
 
     boolean existsByGoogleId(String googleId);
+
+    boolean existsByUsernameEqualsIgnoreCase(String username);
 }

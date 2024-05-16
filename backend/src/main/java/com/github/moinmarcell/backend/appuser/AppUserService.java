@@ -27,6 +27,10 @@ public class AppUserService {
         return appUserRepository.existsByGoogleId(googleId);
     }
 
+    public boolean existsByUsername(String username) {
+        return appUserRepository.existsByUsernameEqualsIgnoreCase(username);
+    }
+
     public void create(AppUser appUser) {
         appUserRepository.save(appUser);
     }

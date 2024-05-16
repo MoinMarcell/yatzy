@@ -1,0 +1,84 @@
+.register-page-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.register-page-container {
+    background-color: #1c1c1c;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 80%;
+    padding: 10px;
+    opacity: 0.8;
+}
+
+.register-page-input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.register-page-input-container input {
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+.register-page-input-padding-left-50 {
+    padding-left: 50px;
+}
+
+.register-page-input-padding-left-10 {
+    padding-left: 10px;
+}
+
+.register-page-input-container input:focus {
+    outline: none;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 30%;
+    transform: translateY(-50%);
+    color: white;
+}
+
+.input-icon-check {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+}
+
+.register-page-button {
+    background-color: #e4e4e4;
+    height: 50px;
+    border: 1px solid #1c1c1c;
+    font-weight: bold;
+    color: #070707;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.register-page-button:disabled {
+    background-color: #6c6c6c;
+    color: #3f3f3f;
+}
+
+.register-page-infobox-container {
+    color: white;
+}
