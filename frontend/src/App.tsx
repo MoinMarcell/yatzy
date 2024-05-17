@@ -33,7 +33,10 @@ export default function App(): JSX.Element {
         <Routes>
             <Route path="/login" element={<LoginPage appUser={appUser}/>}/>
             <Route element={<ProtectedRoutes appUser={appUser}/>}>
-                <Route path="/" element={<HomePage/>}/>
+                <Route path="/" element={
+                    //@ts-expect-error already checked in ProtectedRoutes
+                    <HomePage appUser={appUser}/>}
+                />
                 <Route path="/register" element={<RegisterPage appUser={appUser} setAppUser={setAppUser}/>}/>
             </Route>
         </Routes>
