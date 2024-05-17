@@ -14,39 +14,40 @@ type RegisterPageProps = {
 export default function RegisterPage({appUser, setAppUser}: RegisterPageProps): JSX.Element {
     const [username, setUsername] = useState<string>("");
     const [icon, setIcon] = useState<"" | "loading" | "success" | "error">("");
+    const [isError, setIsError] = useState<boolean>(username.length < 3 || username.length > 20 || !username.match(/^[a-zA-Z0-9]+$/));
     const navigate = useNavigate();
 
-    const isError = username.length < 3 || username.length > 20 || !username.match(/^[a-zA-Z0-9]+$/);
     const checkUsername = useCallback((): void => {
-        if (isError) {
-            setIcon("error");
-            return;
-        }
         axios.get(`/api/users/check-username/${username}`)
             .then((res) => {
                 const isAvailable: boolean = res.data;
                 if (isAvailable) {
                     setIcon("success");
+                    setIsError(false);
                 } else {
                     setIcon("error");
+                    setIsError(true);
                 }
             })
             .catch((err) => {
                 console.log(err);
             });
-    }, [isError, username]);
+    }, [username]);
 
     useEffect(() => {
         let timeoutId: number | undefined;
         if (username.length > 2 && username.length < 21) {
             setIcon("loading");
+            setIsError(true);
             timeoutId = setTimeout(() => {
                 checkUsername();
             }, 1000);
         } else if (username.length === 0) {
             setIcon("");
+            setIsError(true);
         } else if (username.length > 20 || username.length < 3) {
             setIcon("error");
+            setIsError(true);
         }
 
         return () => {
