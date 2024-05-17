@@ -30,6 +30,6 @@ public class AppUserController {
 
     @GetMapping("/check-username/{username}")
     public boolean checkUsername(@PathVariable("username") String username) {
-        return !appUserService.existsByUsername(username);
+        return appUserService.existsByUsername(username);
     }
 }
