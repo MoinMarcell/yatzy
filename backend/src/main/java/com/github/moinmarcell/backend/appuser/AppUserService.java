@@ -31,7 +31,11 @@ public class AppUserService {
             "cunt",
             "fuck",
             "shit",
-            "ass"
+            "ass",
+            "wichser",
+            "wichse",
+            "wichs",
+            "penner"
     );
 
     public AppUser updateUsername(String id, String username) {
