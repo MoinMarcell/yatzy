@@ -1,4 +1,7 @@
 import {JSX} from "react";
+import "./HomePage.css";
+import {faArrowRightToBracket} from "@fortawesome/free-solid-svg-icons";
+import CustomButton from "../components/CustomButton.tsx";
 
 export default function HomePage(): JSX.Element {
     function logout(): void {
@@ -7,9 +10,13 @@ export default function HomePage(): JSX.Element {
     }
 
     return (
-        <>
-            <button onClick={logout}>Logout</button>
-            <h1>Home</h1>
-        </>
+        <div className="home-page-container">
+            <CustomButton
+                onClick={logout}
+                text="Logout"
+                icon={faArrowRightToBracket}
+                iconRotation={180}
+            />
+        </div>
     )
 }

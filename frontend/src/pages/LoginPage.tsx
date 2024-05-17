@@ -2,8 +2,8 @@ import {JSX} from "react";
 import {AppUser} from "../types/AppUser.ts";
 import {Navigate} from "react-router-dom";
 import "./LoginPage.css";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightToBracket} from "@fortawesome/free-solid-svg-icons";
+import CustomButton from "../components/CustomButton.tsx";
 
 type LoginPageProps = {
     appUser: AppUser | null | undefined
@@ -21,9 +21,11 @@ export default function LoginPage({appUser}: LoginPageProps): JSX.Element {
 
     return (
         <div className="login-page">
-            <button onClick={login}>
-                <FontAwesomeIcon icon={faArrowRightToBracket}/> Login with Google
-            </button>
+            <CustomButton
+                onClick={login}
+                text="Login with Google"
+                icon={faArrowRightToBracket}
+            />
         </div>
     )
 }
