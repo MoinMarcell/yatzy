@@ -5,6 +5,7 @@ import CustomButton from "../components/CustomButton.tsx";
 import Avatar from "../components/Avatar.tsx";
 import {AppUser} from "../types/AppUser.ts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import axios from "axios";
 
 type HomePageProps = {
     appUser: AppUser
@@ -18,6 +19,14 @@ export default function HomePage(props: HomePageProps): JSX.Element {
         window.open(host + "/logout", "_self")
     }
 
+    function deleteAccount(): void {
+        axios.delete("/api/users/" + props.appUser.id)
+            .then(() => {
+                logout();
+            })
+            .finally(() => setOpenMenu(false))
+    }
+
     return (
         <div className="home-page-container">
             <div className="home-page-avatar">
@@ -26,7 +35,7 @@ export default function HomePage(props: HomePageProps): JSX.Element {
                 <div className={"home-page-avatar-menu " + (openMenu ? "display-flex" : "display-none")}>
                     <button className="home-page-avatar-menu-close-button" onClick={() => setOpenMenu(false)}>
                         <FontAwesomeIcon icon={faX}/></button>
-                    <button className="home-page-avatar-menu-button" disabled>Delete Account</button>
+                    <button className="home-page-avatar-menu-button" onClick={deleteAccount}>Delete Account</button>
                 </div>
             </div>
             <div className="home-page-buttons">

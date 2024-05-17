@@ -86,6 +86,10 @@ public class AppUserService {
         appUserRepository.save(appUser);
     }
 
+    public void delete(String id) {
+        appUserRepository.deleteById(id);
+    }
+
     private AppUser getById(String id) {
         return appUserRepository
                 .findById(id)
