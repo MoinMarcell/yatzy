@@ -12,7 +12,7 @@ type RegisterPageProps = {
     setAppUser: (appUser: AppUser) => void
 }
 
-export default function RegisterPage({appUser, setAppUser}: RegisterPageProps): JSX.Element {
+export default function RegisterPage({appUser, setAppUser}: Readonly<RegisterPageProps>): JSX.Element {
     const [username, setUsername] = useState<string>("");
     const [icon, setIcon] = useState<"" | "loading" | "success" | "error">("");
     const [isError, setIsError] = useState<boolean>(username.length < 3 || username.length > 20 || !username.match(/^[a-zA-Z0-9]+$/));

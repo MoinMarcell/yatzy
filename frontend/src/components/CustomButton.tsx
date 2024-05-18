@@ -14,7 +14,7 @@ type CustomButtonProps = {
     disabled?: boolean
 }
 
-export default function CustomButton(props: CustomButtonProps): JSX.Element {
+export default function CustomButton(props: Readonly<CustomButtonProps>): JSX.Element {
     return (
         <button
             type={props.type}

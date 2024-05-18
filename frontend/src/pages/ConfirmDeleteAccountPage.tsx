@@ -13,7 +13,7 @@ type ConfirmDeleteAccountPageProps = {
     setOpenMenu: (openMenu: boolean) => void
 }
 
-export default function ConfirmDeleteAccountPage(props: ConfirmDeleteAccountPageProps): JSX.Element {
+export default function ConfirmDeleteAccountPage(props: Readonly<ConfirmDeleteAccountPageProps>): JSX.Element {
     const [isDisabled, setIsDisabled] = useState<boolean>(false);
     const navigate = useNavigate();
 

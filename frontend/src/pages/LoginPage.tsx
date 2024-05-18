@@ -9,7 +9,7 @@ type LoginPageProps = {
     appUser: AppUser | null | undefined
 }
 
-export default function LoginPage({appUser}: LoginPageProps): JSX.Element {
+export default function LoginPage({appUser}: Readonly<LoginPageProps>): JSX.Element {
     if (appUser) {
         return <Navigate to="/"/>
     }

@@ -14,7 +14,7 @@ type HomePageProps = {
     openMenu: boolean
 }
 
-export default function HomePage(props: HomePageProps): JSX.Element {
+export default function HomePage(props: Readonly<HomePageProps>): JSX.Element {
     const navigate = useNavigate();
 
     return (
