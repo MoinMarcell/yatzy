@@ -7,6 +7,8 @@ import axios from "axios";
 import RegisterPage from "./pages/RegisterPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import ConfirmDeleteAccountPage from "./pages/ConfirmDeleteAccountPage.tsx";
+import {Slide, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function App(): JSX.Element {
     const [appUser, setAppUser] = useState<AppUser | null | undefined>(undefined);
@@ -37,19 +39,34 @@ export default function App(): JSX.Element {
     }
 
     return (
-        <Routes>
-            <Route path="/login" element={<LoginPage appUser={appUser}/>}/>
-            <Route element={<ProtectedRoutes appUser={appUser}/>}>
-                <Route path="/" element={
-                    //@ts-expect-error already checked in ProtectedRoutes
-                    <HomePage logout={logout} setOpenMenu={setOpenMenu} openMenu={openMenu} appUser={appUser}/>
-                }/>
-                <Route path="/register" element={<RegisterPage appUser={appUser} setAppUser={setAppUser}/>}/>
-                <Route path="/confirm/delete" element={
-                    //@ts-expect-error already checked in ProtectedRoutes
-                    <ConfirmDeleteAccountPage logout={logout} setOpenMenu={setOpenMenu} appUser={appUser}/>
-                }/>
-            </Route>
-        </Routes>
+        <>
+            <Routes>
+                <Route path="/login" element={<LoginPage appUser={appUser}/>}/>
+                <Route element={<ProtectedRoutes appUser={appUser}/>}>
+                    <Route path="/" element={
+                        //@ts-expect-error already checked in ProtectedRoutes
+                        <HomePage logout={logout} setOpenMenu={setOpenMenu} openMenu={openMenu} appUser={appUser}/>
+                    }/>
+                    <Route path="/register" element={<RegisterPage appUser={appUser} setAppUser={setAppUser}/>}/>
+                    <Route path="/confirm/delete" element={
+                        //@ts-expect-error already checked in ProtectedRoutes
+                        <ConfirmDeleteAccountPage logout={logout} setOpenMenu={setOpenMenu} appUser={appUser}/>
+                    }/>
+                </Route>
+            </Routes>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition={Slide}
+            />
+        </>
     )
 }

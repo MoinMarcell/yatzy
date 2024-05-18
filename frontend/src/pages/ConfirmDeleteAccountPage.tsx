@@ -1,10 +1,11 @@
 import axios from "axios";
-import {JSX} from "react";
+import {JSX, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import "./ConfirmDeleteAccountPage.css";
 import CustomButton from "../components/CustomButton.tsx";
 import {faBan, faTrashCan} from "@fortawesome/free-solid-svg-icons";
 import {AppUser} from "../types/AppUser.ts";
+import {toast} from "react-toastify";
 
 type ConfirmDeleteAccountPageProps = {
     appUser: AppUser,
@@ -13,12 +14,16 @@ type ConfirmDeleteAccountPageProps = {
 }
 
 export default function ConfirmDeleteAccountPage(props: ConfirmDeleteAccountPageProps): JSX.Element {
+    const [isDisabled, setIsDisabled] = useState<boolean>(false);
     const navigate = useNavigate();
 
     function deleteAccount(): void {
+        setIsDisabled(true);
         axios.delete("/api/users/" + props.appUser.id)
             .then(() => {
-                props.logout();
+                toast.success("Account deleted. You will be redirected to the login page.", {
+                    onClose: () => props.logout()
+                });
             })
             .finally(() => props.setOpenMenu(false))
     }
@@ -31,11 +36,13 @@ export default function ConfirmDeleteAccountPage(props: ConfirmDeleteAccountPage
                     onClick={deleteAccount}
                     text="Delete Account"
                     icon={faTrashCan}
+                    disabled={isDisabled}
                 />
                 <CustomButton
                     onClick={() => navigate("/")}
                     text="Cancel"
                     icon={faBan}
+                    disabled={isDisabled}
                 />
             </div>
         </div>

@@ -11,6 +11,7 @@ type CustomButtonProps = {
     iconRotation?: RotateProp,
     iconSize?: SizeProp,
     onClick?: () => void,
+    disabled?: boolean
 }
 
 export default function CustomButton(props: CustomButtonProps): JSX.Element {
@@ -19,6 +20,7 @@ export default function CustomButton(props: CustomButtonProps): JSX.Element {
             type={props.type}
             className="custom-button"
             onClick={props.onClick}
+            disabled={props.disabled}
         >
             {
                 props.icon &&

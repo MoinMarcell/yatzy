@@ -5,6 +5,7 @@ import {Navigate, useNavigate} from "react-router-dom";
 import "./RegisterPage.css";
 import {faCheck, faSpinner, faX} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {toast} from "react-toastify";
 
 type RegisterPageProps = {
     appUser: AppUser | null | undefined,
@@ -67,10 +68,16 @@ export default function RegisterPage({appUser, setAppUser}: RegisterPageProps): 
         e.preventDefault();
         axios.put(`/api/users/${appUser.id}/${username}`)
             .then((res) => {
-                setAppUser(res.data);
-                navigate("/");
+                setIsError(true);
+                toast.success("Account created. You will be redirected to the login page.", {
+                    onClose: () => {
+                        setAppUser(res.data);
+                        navigate("/");
+                    }
+                });
             })
             .catch((err) => {
+                toast.error("Error creating account.");
                 console.log(err);
             });
     }
