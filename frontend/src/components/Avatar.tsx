@@ -9,11 +9,15 @@ type AvatarProps = {
 
 export default function Avatar(props: Readonly<AvatarProps>): JSX.Element {
     return (
-        <img
-            src={props.avatarUrl}
-            alt={props.alt ? props.alt : "avatar"}
-            className="avatar"
+        <button
+            className="avatar-button"
             onClick={props.onClick}
-        />
+        >
+            <img
+                src={props.avatarUrl}
+                alt={props.alt ? props.alt : "avatar"}
+                className="avatar"
+            />
+        </button>
     );
 }
