@@ -5,9 +5,6 @@ type AvatarProps = {
     avatarUrl: string,
     alt?: string,
     onClick?: () => void,
-    onMouseOver?: () => void,
-    onFocus?: () => void,
-    onKeyDown?: () => void,
 }
 
 export default function Avatar(props: Readonly<AvatarProps>): JSX.Element {
@@ -17,9 +14,6 @@ export default function Avatar(props: Readonly<AvatarProps>): JSX.Element {
             alt={props.alt ? props.alt : "avatar"}
             className="avatar"
             onClick={props.onClick}
-            onMouseOver={props.onMouseOver}
-            onFocus={props.onFocus}
-            onKeyDown={props.onKeyDown}
         />
     );
 }
