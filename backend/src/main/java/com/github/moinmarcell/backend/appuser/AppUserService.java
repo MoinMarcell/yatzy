@@ -62,9 +62,6 @@ public class AppUserService {
         if (username.isBlank()) {
             return false;
         }
-        if (username.equalsIgnoreCase("admin")) {
-            return false;
-        }
         if (username.length() < 3 || username.length() > 20) {
             return false;
         }
