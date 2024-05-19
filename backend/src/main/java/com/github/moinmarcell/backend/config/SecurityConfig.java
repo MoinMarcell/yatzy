@@ -35,8 +35,7 @@ public class SecurityConfig {
                 .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .exceptionHandling(c -> c.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .authorizeHttpRequests(c -> c
-                        .requestMatchers("/api/dices/roll/**").permitAll()
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
                 .oauth2Login(c -> c.successHandler((request, response, authentication) -> {
                     var principal = (OAuth2User) authentication.getPrincipal();
