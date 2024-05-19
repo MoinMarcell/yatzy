@@ -34,7 +34,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .exceptionHandling(c -> c.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
-                .authorizeHttpRequests(c -> c.anyRequest().authenticated())
+                .authorizeHttpRequests(c -> c
+                        .requestMatchers("/api/dices/roll/**").permitAll()
+                        .anyRequest().permitAll()
+                )
                 .oauth2Login(c -> c.successHandler((request, response, authentication) -> {
                     var principal = (OAuth2User) authentication.getPrincipal();
                     String googleId = principal.getAttributes().get("sub").toString();
