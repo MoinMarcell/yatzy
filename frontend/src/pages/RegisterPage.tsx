@@ -69,7 +69,7 @@ export default function RegisterPage({appUser, setAppUser}: Readonly<RegisterPag
         axios.put(`/api/users/${appUser.id}/${username}`)
             .then((res) => {
                 setIsError(true);
-                toast.success("Account created. You will be redirected to the login page.", {
+                toast.success("Account created. You will be redirected to the Dashboard.", {
                     onClose: () => {
                         setAppUser(res.data);
                         navigate("/");
